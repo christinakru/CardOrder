@@ -75,9 +75,20 @@ public class CardOrderTest {
     }
 
     @Test
-    void sendEmpty() {
+    void sendEmptyName() {
+        $("[data-test-id=name] input").setValue("");
+        $("[data-test-id=phone] input").setValue("+79012345678");
         $("[data-test-id=agreement]").click();
         $("[type='button']").click();
         $("[data-test-id=name].input_invalid .input__sub").shouldHave(Condition.exactText("Поле обязательно для заполнения"));
+    }
+
+    @Test
+    void sendEmptyPhone() {
+        $("[data-test-id=name] input").setValue("Иван Иванов");
+        $("[data-test-id=phone] input").setValue("");
+        $("[data-test-id=agreement]").click();
+        $("[type='button']").click();
+        $("[data-test-id=phone].input_invalid .input__sub").shouldHave(Condition.exactText("Поле обязательно для заполнения"));
     }
 }
